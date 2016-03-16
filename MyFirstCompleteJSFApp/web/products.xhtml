@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>The Products</title>
+    </h:head>
+    <h:body>
+        <h1><h:outputText value="The Products"/></h1>
+        <h:form>
+        <h:dataTable var="item" value="#{productFace.products}" border="1">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Code"/>
+                </f:facet>
+                <h:outputText value="#{item.code}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Name"/>
+                </f:facet>
+                <h:outputText value="#{item.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Stock"/>
+                </f:facet>
+                <h:outputText value="#{item.numberOfItens}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Price"/>
+                </f:facet>
+                <h:outputText value="#{item.price}">
+                    <f:convertNumber type="currency" currencySymbol="AKZ"/>
+                </h:outputText>
+            </h:column>
+            
+             <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Actions"/>
+                </f:facet>
+                 <h:commandLink value="delete" action="#{productFace.removeProduct()}">
+                     <f:setPropertyActionListener target="#{productFace.selectedProduct}" value="#{item}"/>
+                 </h:commandLink>
+                 <h:outputText value="/"/>
+                 <h:commandLink value="edit" action="#{productFace.startEditProduct()}">
+                     <f:setPropertyActionListener target="#{productFace.selectedProduct}" value="#{item}"/>
+                 </h:commandLink>
+            </h:column>
+            
+        </h:dataTable>
+            
+            <h:commandButton value="Return to Main" action="gotoMain"/>
+            <h:commandButton value="Add a new Product" action="#{productFace.startAddProduct()}"/>
+            
+            </h:form>
+    </h:body>
+</html>
+
