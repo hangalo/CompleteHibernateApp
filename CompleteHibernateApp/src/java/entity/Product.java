@@ -6,11 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +34,8 @@ public class Product implements Serializable{
     @ManyToOne
     @JoinColumn(name="id_owner")
     private User owner;
+    @OneToMany(mappedBy = "product")
+    private List<Sale> sales;
 
     public Integer getId() {
         return id;
@@ -72,7 +76,17 @@ public class Product implements Serializable{
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
+    }
     
-    
+    public boolean isOutOfStock(){
+    return stock<=0;
+    }
     
 }

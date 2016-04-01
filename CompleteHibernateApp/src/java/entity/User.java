@@ -32,6 +32,9 @@ public class User implements  Serializable{
     private String password;
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Product> products;
+    
+    @OneToMany(mappedBy = "ownerOfSale", fetch = FetchType.LAZY)
+    private List<Sale> sales;
     public User() {
     }
 
@@ -73,6 +76,14 @@ public class User implements  Serializable{
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
     }
     
     
